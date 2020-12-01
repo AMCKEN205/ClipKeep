@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 # Add root level Web.config file to gitignore as it includes private DB authorization key.
-./ClipKeep/Web.config
+**/ClipKeep/Web.config
