@@ -50,9 +50,8 @@ namespace ClipKeep.Controllers
         public ActionResult Register()
         {
             // Styled colouring for subtext 'ClipKeep' text.
-            string clipKeepTextStyled =
-                "<b><span style=\"color: #7483f1\">Clip</span><span style=\"color: #fdba12\">Keep</span></b>";
-            ViewBag.SubText = $"Login to {clipKeepTextStyled}";
+           
+            ViewBag.SubText = $"Sign up to {_clipKeepTextStyled}";
             var userModel = new User();
             return View(userModel);
         }
@@ -61,10 +60,10 @@ namespace ClipKeep.Controllers
         /// Handle a user submitting details for registration
         /// </summary>
         [HttpPost]
-        public ActionResult Register(User userModel)
+        public ActionResult Register(UserRegister userModel)
         {
-            FormsAuthentication.SetAuthCookie(userModel.UserId, false);
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Login");
         }
     }
 }
