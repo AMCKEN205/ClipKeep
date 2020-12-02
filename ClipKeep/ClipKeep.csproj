@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -171,9 +171,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CosmosConfig.cs" />
-    <Compile Include="Models\Interfaces\IDBStoreable.cs" />
+    <Compile Include="Models\Interfaces\IDisplayable.cs" />
+    <Compile Include="Models\PastedImage.cs" />
     <Compile Include="Models\PastedItem.cs" />
     <Compile Include="Models\PastedText.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +187,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Icons\check-list32.png" />
+    <Content Include="Icons\check-list16.png" />
+    <Content Include="Icons\check-list128.png" />
+    <Content Include="Icons\check-list64.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -198,6 +204,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Icons\check-list512.png" />
+    <Content Include="AuthStyles\AuthStyles.css" />
+    <Content Include="SharedStyles\SharedStyles.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -214,6 +223,8 @@
     <Content Include="Views\MainApp\Settings.cshtml" />
     <Content Include="Views\MainApp\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\_Layout.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -249,7 +260,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56738</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56738/</IISUrl>
+          <IISUrl>http://localhost:1052/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

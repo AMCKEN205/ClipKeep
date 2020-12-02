@@ -1,0 +1,19 @@
+﻿/* Override button behaviour on a sitewide level to fit site colour scheme */
+.btn-primary {
+    background-color: #7584F2 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #7d75ef !important;
+    border-color: #FDBA12 !important;
+}
+
+.editor-field input.text-box:focus {
+    border-color: #4253CE;
+    background: #ede480
+}
