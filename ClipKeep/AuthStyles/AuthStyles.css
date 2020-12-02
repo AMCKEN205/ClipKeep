@@ -1,0 +1,48 @@
+﻿#MainContentLogin {
+    background-color: rgba(147, 140, 140,0.2);
+    width: 30vw;
+    height: 35vh;
+    min-height: 360px;
+    min-width: 256px;
+    max-height: 380px;
+    max-width: 380px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 20px;
+    padding-bottom: 390px;
+    border-radius: 30px;
+}
+
+.body-content {
+    margin-top: auto;
+    margin-bottom:auto;
+}
+
+
+.editor-field {
+    padding-bottom: 3px;
+ }
+
+.btn-primary {
+    margin-top: 5px;
+    width: 25vw;
+    min-width: 200px;
+    max-width: 324px;
+}
+
+.editor-label label {
+    width: 25vw;
+    min-width: 200px;
+    max-width: 324px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+}
+
+.editor-field input.text-box {
+    width: 25vw;
+    min-width: 200px;
+    max-width: 324px; 
+    margin-right: auto;
+    margin-left: auto;
+}

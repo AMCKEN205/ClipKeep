@@ -264,4 +264,5 @@ __pycache__/
 **/ClipKeep/Web.config
 
 # Add generic content and scripts folders to git ignore
-**/ClipKeep/Content/
+ClipKeep/Content/*
+ClipKeep/Scripts/*
