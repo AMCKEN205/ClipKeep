@@ -1,15 +1,13 @@
-﻿#MainContentLogin {
+﻿#MainContentLogin, #MainContentRegister {
     background-color: rgba(147, 140, 140,0.2);
     width: 30vw;
-    height: 35vh;
-    min-height: 360px;
-    min-width: 256px;
-    max-height: 380px;
+    display: block;
+    overflow: auto;
+    min-width: 285px;
     max-width: 380px;
     margin-right: auto;
     margin-left: auto;
     padding-top: 20px;
-    padding-bottom: 390px;
     border-radius: 30px;
 }
 

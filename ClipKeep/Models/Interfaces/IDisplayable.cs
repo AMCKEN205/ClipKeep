@@ -5,7 +5,9 @@
     /// </summary>
     public interface IDisplayable
     {
-
+        /// <summary>
+        /// Display the object on the frontend webpage.
+        /// </summary>
         void Display();
 
     }

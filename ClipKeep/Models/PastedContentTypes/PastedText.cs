@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ClipKeep.Models.Interfaces;
 using Newtonsoft.Json;
 
 namespace ClipKeep.Models
 {
-    public class PastedText : PastedItem<string>, IDisplayable
+    public sealed class PastedText : PastedItem<string>
     {
-        public void Display()
+        public override void Display()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> StoreInDb()
         {
             throw new NotImplementedException();
         }

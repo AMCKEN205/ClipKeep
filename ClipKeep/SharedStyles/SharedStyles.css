@@ -38,3 +38,6 @@ a:active {
     color: #6343cc !important;
 }
 
+.error {
+    color: red;
+}

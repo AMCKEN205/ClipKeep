@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -23,6 +24,7 @@ namespace ClipKeep.Controllers
         /// Handle user login view startup
         /// </summary>
         /// <returns> The login view connected to the user model </returns>
+        [HttpGet]
         public ActionResult Login()
         {
 
@@ -35,9 +37,15 @@ namespace ClipKeep.Controllers
         /// Handle a user submitting login credentials
         /// </summary>
         [HttpPost]
-        public ActionResult Login(User userModel)
+        public async  Task<ActionResult> Login(User userModel)
         {
-            FormsAuthentication.SetAuthCookie(userModel.UserId, false);
+            // Handle misentry of model attributes first (e.g. no email entered).
+            if (!ModelState.IsValid)
+            {
+                // And return the original view with the model currently under use
+                return View(userModel);
+            }
+            FormsAuthentication.SetAuthCookie(userModel.Username, false);
             return RedirectToAction("Index");
         }
 
@@ -47,12 +55,12 @@ namespace ClipKeep.Controllers
         /// Handle user register view startup
         /// </summary>
         /// <returns> The login view connected to the user model </returns>
+        [HttpGet]
         public ActionResult Register()
         {
             // Styled colouring for subtext 'ClipKeep' text.
-           
             ViewBag.SubText = $"Sign up to {_clipKeepTextStyled}";
-            var userModel = new User();
+            var userModel = new UserRegister();
             return View(userModel);
         }
 
@@ -60,10 +68,29 @@ namespace ClipKeep.Controllers
         /// Handle a user submitting details for registration
         /// </summary>
         [HttpPost]
-        public ActionResult Register(UserRegister userModel)
+        public async Task<ActionResult> Register(UserRegister userRegisterModel)
         {
-            
-            return RedirectToAction("Login");
+            // Handle misentry of model attributes first (e.g. no username entered).
+            if (!ModelState.IsValid)
+            {
+                // And return the original view with the model currently under use
+                return View(userRegisterModel);
+            }
+
+            // Add the newly registered user to the DB
+            var userAddSuccess = await userRegisterModel.StoreInDb();
+
+            // Return specific view based on the success or failure of adding a user.
+            if (userAddSuccess)
+            {
+                ViewBag.FailToRegisterError = null;
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ViewBag.FailToRegisterError = "Sorry, somethings gone wrong on our end! Try again later.";
+                return View(userRegisterModel);
+            }
         }
     }
 }

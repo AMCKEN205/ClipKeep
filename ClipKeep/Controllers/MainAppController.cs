@@ -14,7 +14,7 @@ namespace ClipKeep.Controllers
         {
             var userModel = GetUser();
             // Check we're dealing with an authorised user first.
-            if (userModel.UserId == null)
+            if (userModel.Username == null)
             {
                 return RedirectToAction("Login", "Auth");
             }
@@ -24,7 +24,7 @@ namespace ClipKeep.Controllers
         public ActionResult Settings(User userModel = null)
         {
             // Check we're dealing with an authorised user first.
-            if (userModel.UserId == null)
+            if (userModel.Username == null)
             {
                 return RedirectToAction("Login", "Auth");
             }

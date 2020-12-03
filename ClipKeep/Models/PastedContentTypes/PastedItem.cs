@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using ClipKeep.Models.Interfaces;
 using Newtonsoft.Json;
 
 namespace ClipKeep.Models
@@ -8,7 +10,7 @@ namespace ClipKeep.Models
     /// Would make this protected if multiple assemblies existed,
     /// but as this is just a prototype app shouldn't matter too much/shouldn't need to.
     /// </summary>
-    public abstract class PastedItem<T>
+    public abstract class PastedItem<T> : IDisplayable, IDbStoreable
     {
         protected string _parentUserId;
 
@@ -43,6 +45,8 @@ namespace ClipKeep.Models
 
         public abstract string ToJson();
 
+        public abstract void Display();
 
+        public abstract Task<bool> StoreInDb();
     }
 }

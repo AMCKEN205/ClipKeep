@@ -171,10 +171,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CosmosConfig.cs" />
+    <Compile Include="Models\CustomModelValidators\ContainsSpecialCharactersAttribute.cs" />
+    <Compile Include="Models\CustomModelValidators\UnameExistsAttribute.cs" />
+    <Compile Include="Models\CustomModelValidators\UnameMatchesPass.cs" />
+    <Compile Include="Models\CustomModelValidators\UnameTakenAttribute.cs" />
+    <Compile Include="Models\Interfaces\IDbStoreable.cs" />
     <Compile Include="Models\Interfaces\IDisplayable.cs" />
-    <Compile Include="Models\PastedImage.cs" />
-    <Compile Include="Models\PastedItem.cs" />
-    <Compile Include="Models\PastedText.cs" />
+    <Compile Include="Models\PastedContentTypes\PastedImage.cs" />
+    <Compile Include="Models\PastedContentTypes\PastedItem.cs" />
+    <Compile Include="Models\PastedContentTypes\PastedText.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -233,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

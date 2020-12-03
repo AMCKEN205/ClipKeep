@@ -4,34 +4,46 @@
     Layout = "./_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+<div id="MainContentLogin">
+    <div class="col-md d-flex justify-content-center text-center">
+        <img src="~/Icons/check-list128.png" alt="logo " />
+        <h2>@Html.Raw(ViewBag.SubText)</h2>
+
+        @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @id = "loginform" }))
+        {
+            <fieldset>
+                <div class="editor-group">
+                    <div class="editor-label">
+                        @Html.LabelFor(userModel => userModel.Username)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(userModel => userModel.Username, new { htmlAttributes = new { @class = "form-control", @name = "username" , placeholder = "Enter Username" } })
+                        @Html.ValidationMessageFor(userModel => userModel.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="editor-group">
+                    <div class="editor-label">
+                        @Html.LabelFor(userModel => userModel.Password)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(userModel => userModel.Password, new { htmlAttributes = new { @class = "form-control", @name = "password", placeholder = "Enter Password", @type = "password" } })
+                        @Html.ValidationMessageFor(userModel => userModel.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <p>
+                    <input class="btn btn-primary" type="submit" value="Login" />
+                </p>
+                <p>
+                    Not got an account yet? <a href="Register">Register!</a>
+                </p>
+            </fieldset>
+        }
+
+    </div>
+</div>
+@section scripts
 {
-<fieldset>
-    <div class="editor-group">
-        <div class="editor-label">
-            @Html.LabelFor(userModel => userModel.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(userModel => userModel.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email" }})
-            @Html.ValidationMessageFor(userModel => userModel.Email)
-        </div>
-    </div>
-
-    <div class="editor-group">
-        <div class="editor-label">
-            @Html.LabelFor(userModel => userModel.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(userModel => userModel.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password", @type = "password" } })
-            @Html.ValidationMessageFor(userModel => userModel.Password)
-        </div>
-    </div>
-
-    <p>
-        <input class="btn btn-primary" type="submit" value="Login" />
-    </p>
-    <p>
-        Not got an account yet? <a href="Register">Register!</a> 
-    </p>
-</fieldset>
+    @Scripts.Render("~/AuthScripts/LoginDetailsValidate.js")
 }
