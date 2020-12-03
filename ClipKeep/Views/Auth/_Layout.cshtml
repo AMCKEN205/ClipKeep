@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/ico" href="~/Icons/check-list32.png">
+    <link rel="stylesheet" runat="server" media="screen" href="~/AuthStyles/AuthStyles.css" />
+    <title>@ViewBag.Title - ClipKeep</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/SharedStyles/SharedStyles.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">
+        <div class="row">
+            <!-- Render visited page content -->
+            @RenderBody()
+        </div>
+
+        <footer class="justify-content-center text-center" id="FooterContent">
+            <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+            <p>&copy; @DateTime.Now.Year - ClipKeep</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

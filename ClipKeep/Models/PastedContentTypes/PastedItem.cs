@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Threading.Tasks;
+using ClipKeep.Models.Interfaces;
 using Newtonsoft.Json;
 
 namespace ClipKeep.Models
 {
     /// <summary>
     /// Base class for all pasted item types (text or photo atm).
-    /// Would make this protected if multiple namespaces existed,
+    /// Would make this protected if multiple assemblies existed,
     /// but as this is just a prototype app shouldn't matter too much/shouldn't need to.
     /// </summary>
-    public abstract class PastedItem
+    public abstract class PastedItem<T> : IDisplayable, IDbStoreable
     {
-
         protected string _parentUserId;
 
         protected PastedItem()
@@ -22,16 +23,19 @@ namespace ClipKeep.Models
         /// <summary>
         ///  Id of user the pasted item belongs to.
         /// </summary>
-        [JsonProperty(PropertyName = "parentUserId")]
         public string ParentUserId
         {
             get { return _parentUserId; }
         }
 
         /// <summary>
+        /// The actual pasted text/image
+        /// </summary>
+        public T Content { get; set; }
+
+        /// <summary>
         /// Time the user pasted the item into clipkeep
         /// </summary>
-        [JsonProperty(PropertyName = "datePasted")]
         public DateTime DatePasted { get; }
         
         private void SetParentUserId()
@@ -39,13 +43,10 @@ namespace ClipKeep.Models
             _parentUserId = "Not Implemented";
         }
 
-        /// <summary>
-        /// !!! For debugging purposes !!!
-        /// </summary>
-        /// <returns>
-        /// String output of object's properties.
-        /// </returns>
-        public abstract override string ToString();
+        public abstract string ToJson();
 
+        public abstract void Display();
+
+        public abstract Task<bool> StoreInDb();
     }
 }

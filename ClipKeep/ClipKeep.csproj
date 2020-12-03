@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -171,33 +171,52 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CosmosConfig.cs" />
-    <Compile Include="Models\Interfaces\IDBStoreable.cs" />
-    <Compile Include="Models\PastedItem.cs" />
-    <Compile Include="Models\PastedText.cs" />
+    <Compile Include="Models\CustomModelValidators\ContainsSpecialCharactersAttribute.cs" />
+    <Compile Include="Models\CustomModelValidators\UnameExistsAttribute.cs" />
+    <Compile Include="Models\CustomModelValidators\UnameMatchesPass.cs" />
+    <Compile Include="Models\CustomModelValidators\UnameTakenAttribute.cs" />
+    <Compile Include="Models\Interfaces\IDbStoreable.cs" />
+    <Compile Include="Models\Interfaces\IDisplayable.cs" />
+    <Compile Include="Models\PastedContentTypes\PastedImage.cs" />
+    <Compile Include="Models\PastedContentTypes\PastedItem.cs" />
+    <Compile Include="Models\PastedContentTypes\PastedText.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Icons\check-list32.png" />
+    <Content Include="Icons\check-list16.png" />
+    <Content Include="Icons\check-list128.png" />
+    <Content Include="Icons\check-list64.png" />
+    <Content Include="Icons\check-list512.png" />
+    <Content Include="AuthStyles\AuthStyles.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SharedStyles\SharedStyles.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -214,22 +233,21 @@
     <Content Include="Views\MainApp\Settings.cshtml" />
     <Content Include="Views\MainApp\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\_Layout.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -249,7 +267,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56738</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56738/</IISUrl>
+          <IISUrl>http://localhost:1052/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
