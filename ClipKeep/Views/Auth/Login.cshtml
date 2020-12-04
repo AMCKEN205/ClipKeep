@@ -17,7 +17,7 @@
                         @Html.LabelFor(userModel => userModel.Username)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(userModel => userModel.Username, new { htmlAttributes = new { @class = "form-control", @name = "username" , placeholder = "Enter Username" } })
+                        @Html.EditorFor(userModel => userModel.Username, new { htmlAttributes = new { @class = "form-control", @name = "usernamePropertyName" , placeholder = "Enter Username" } })
                         @Html.ValidationMessageFor(userModel => userModel.Username, "", new { @class = "text-danger" })
                     </div>
                 </div>
