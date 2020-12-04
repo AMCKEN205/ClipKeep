@@ -2,6 +2,9 @@
 
 namespace ClipKeep.Models.CustomModelValidators
 {
+    /// <summary>
+    /// Check to see if a password contains the required special characters on registration.
+    /// </summary>
     public class ContainsSpecialCharactersAttribute : ValidationAttribute
     {
         private readonly char[] _specialChars = "!@#$%^&*()<>".ToCharArray();

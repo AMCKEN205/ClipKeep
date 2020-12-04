@@ -6,10 +6,11 @@ using System.Linq;
 namespace ClipKeep.Models.CustomModelValidators
 {
     /// <summary>
-    /// Check an entered username exists in the DB.
+    /// Check to see if a user's chosen username has already been taken on registration form POST.
     /// </summary>
-    public class UnameExistsAttribute : ValidationAttribute
+    public class UnameTakenAttribute : ValidationAttribute
     {
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             // Use parameterised queries to avoid SQL injection
@@ -21,8 +22,8 @@ namespace ClipKeep.Models.CustomModelValidators
 
             // We'll only be getting string values from the username textbox so should be safe cast.
             var username = (string) value;
-            var usernameFieldString = "Username";
-            var unameExistsQueryString = $"SELECT * FROM {users} WHERE {users}.{usernameFieldString} = '{username}' ";
+            var usernameFieldName = "Username";
+            var unameTakenQueryString = $"SELECT * FROM {users} WHERE {users}.{usernameFieldName} = '{username}' ";
 
             using (var client =
                 new DocumentClient(new Uri(CosmosConfig.EndPointUrl), CosmosConfig.AuthorizationKey))
@@ -32,29 +33,16 @@ namespace ClipKeep.Models.CustomModelValidators
                     UriFactory.CreateDocumentCollectionUri(CosmosConfig.DatabaseId, CosmosConfig.UsersCollectionId);
 
                 // Create/execute the query while ensuring we can run it across all partitions
-                var unameTakenQueryResults = client.CreateDocumentQuery(userCollectionUri, unameExistsQueryString,
-                    new FeedOptions {EnableCrossPartitionQuery = true}).ToList();
-
-                if (unameTakenQueryResults.Count() == 0)
+                var unameTakenQueryResults = client.CreateDocumentQuery(userCollectionUri, unameTakenQueryString, new FeedOptions { EnableCrossPartitionQuery = true }).ToList();
+                if (unameTakenQueryResults.Count() > 0)
                 {
-                    // Username doesn't exist
                     return new ValidationResult(FormatErrorMessage(validationContext.DisplayName));
-                }
-                else if (unameTakenQueryResults.Count() > 1)
-                {
-                    // We shouldn't hit this point, as username uniqueness get checked on registration.
-                    // However if we do something has gone seriously wrong, and something 
-                    // malicious is probably going on, so hopefully redirection helps stop it!
-
-                    // Log on server terminal output so we can see the stacktrace server side.
-                    Console.WriteLine(new Exception("*** Critical error! Multiple identical usernames in the DB! ***"));
-
-                    return new ValidationResult("Critical error! Try again later.");
                 }
 
                 // Field is valid
                 return null;
             }
+        
         }
     }
 }

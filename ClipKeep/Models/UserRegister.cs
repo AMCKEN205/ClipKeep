@@ -77,17 +77,17 @@ namespace ClipKeep.Models
         {
             try
             {
+                // Retrieve the user's sign up details formatted ion a JSON doc as required for DB storage
+                var userStoreDoc = GetStoreJsonDoc();
+
+                // Generate the URI for the Users collection we're targerting in our cosmos DB
+                var userCollectionUri =
+                    UriFactory.CreateDocumentCollectionUri(CosmosConfig.DatabaseId, CosmosConfig.UsersCollectionId);
+
                 // Generate a client connection to the cosmos DB that gets disposed of once we've stored the new user's info.
                 using (var client =
                     new DocumentClient(new Uri(CosmosConfig.EndPointUrl), CosmosConfig.AuthorizationKey))
                 {
-                    // Retrieve the user's sign up details formatted ion a JSON doc as required for DB storage
-                    var userStoreDoc = GetStoreJsonDoc();
-
-                    // Generate the URI for the Users collection we're targerting in our cosmos DB
-                    var userCollectionUri =
-                        UriFactory.CreateDocumentCollectionUri(CosmosConfig.DatabaseId, CosmosConfig.UsersCollectionId);
-
                     // Open the asynchronous connection await document retrieval,
                     // feedback the result of this to the controller so it can act appropriately. 
                     await client.OpenAsync();
@@ -127,7 +127,7 @@ namespace ClipKeep.Models
 
             string partitionKey = partitionKeys[partitionKeyIndex];
 
-            var passHash = GetPassHash();
+            var passHash = PasswordHasher.GetPassHashString(Password, _hashSalt);
 
             // Define the properties we'll want to store on user registration.
             var propertiesForStore = new Dictionary<string, string>()
@@ -145,21 +145,7 @@ namespace ClipKeep.Models
             return JObject.Parse(userRegisterJsonDoc);
         }
 
-        /// <summary>
-        /// Generate a password has for password storage
-        /// </summary>
-        /// <returns> The password has for password storage in the database </returns>
-        private string GetPassHash()
-        {
-            var passWithSalt = Password + _hashSalt;
-            var passData = Encoding.UTF8.GetBytes(passWithSalt);
-            using (var hashAlg = new SHA256Managed())
-            {
-                var passHash = hashAlg.ComputeHash(passData);
-                var hashString = BitConverter.ToString(passHash).Replace("-", string.Empty);
-                return hashString;
-            }
-        }
+        
 
     }
 }
