@@ -1,5 +1,7 @@
 # ClipKeep
-Web app that provides a clipboard accessible across different devices!
+Web app that provides a clipboard accessible across different devices! 
+
+Implemented in C#/ASP.NET for server side logic and some HTML + CSS + JS (largely JQuery) on the frontend.
 
 # Browser Compatability 
 The website works best on chrome on mobile, and chrome and edge on desktop. The site works on firefox too however the copy to clipboard button doesn't work for images.
