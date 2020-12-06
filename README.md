@@ -1,7 +1,9 @@
 # ClipKeep
-Web app that provides a clipboard accessible across different devices! 
+MVC web app that provides a clipboard accessible across different devices! Users can store at max 5 items at  one time. If the users pastes a new item and is at the 5 items limit their oldest item is deleted.
 
-Implemented in C#/ASP.NET for server side logic and some HTML + CSS + JS (largely JQuery) on the frontend.
+Implemented in C#/ASP.NET for server side logic, Cosmos DB for the database and some HTML + CSS + JS (largely JQuery) on the frontend.
+
+# Site URL: https://clipkeep.azurewebsites.net/
 
 # Browser Compatability 
 The website works best on chrome on mobile, and chrome and edge on desktop. The site works on firefox too however the copy to clipboard button doesn't work for images.
