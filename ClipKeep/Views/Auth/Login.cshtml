@@ -1,4 +1,4 @@
-﻿@model ClipKeep.Models.User
+﻿@model ClipKeep.Models.UserLogin
 @{
     ViewBag.Title = "Login";
     Layout = "./_Layout.cshtml";
@@ -14,21 +14,21 @@
             <fieldset>
                 <div class="editor-group">
                     <div class="editor-label">
-                        @Html.LabelFor(userModel => userModel.Username)
+                        @Html.LabelFor(userLoginModel => userLoginModel.Username)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(userModel => userModel.Username, new { htmlAttributes = new { @class = "form-control", @name = "usernamePropertyName" , placeholder = "Enter Username" } })
+                        @Html.EditorFor(userLoginModel => userLoginModel.Username, new { htmlAttributes = new { @class = "form-control", @name = "usernamePropertyName" , placeholder = "Enter Username" } })
                         @Html.ValidationMessageFor(userModel => userModel.Username, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="editor-group">
                     <div class="editor-label">
-                        @Html.LabelFor(userModel => userModel.Password)
+                        @Html.LabelFor(userLoginModel => userLoginModel.Password)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(userModel => userModel.Password, new { htmlAttributes = new { @class = "form-control", @name = "password", placeholder = "Enter Password", @type = "password" } })
-                        @Html.ValidationMessageFor(userModel => userModel.Password, "", new { @class = "text-danger" })
+                        @Html.EditorFor(userLoginModel => userLoginModel.Password, new { htmlAttributes = new { @class = "form-control", @name = "password", placeholder = "Enter Password", @type = "password" } })
+                        @Html.ValidationMessageFor(userLoginModel => userLoginModel.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -36,14 +36,11 @@
                     <input class="btn btn-primary" type="submit" value="Login" />
                 </p>
                 <p>
-                    Not got an account yet? <a href="Register">Register!</a>
+                    Not got an account yet?@Html.ActionLink(" Register!", "Register", "Auth") 
                 </p>
             </fieldset>
         }
 
     </div>
 </div>
-@section scripts
-{
-    @Scripts.Render("~/AuthScripts/LoginDetailsValidate.js")
-}
+

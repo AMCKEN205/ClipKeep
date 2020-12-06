@@ -1,25 +1,42 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading.Tasks;
 using ClipKeep.Models.Interfaces;
+using Newtonsoft.Json.Linq;
 
 namespace ClipKeep.Models
 {
-    public sealed class PastedImage : PastedItem<Bitmap>
+    public sealed class PastedImage : IPastedItem
     {
-
-        public override void Display()
+        public PastedImage(JObject getResult)
         {
-            throw new System.NotImplementedException();
+            ContentType = (string) getResult["PastedContentType"];
+            Content = (string) getResult["PastedContent"];
+            DatePasted = DateTime.Parse((string) getResult["DatePasted"]);
+            DbId = (string) getResult["id"];
         }
 
-        public override Task<bool> StoreInDb()
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <summary>
+        /// Allows execution of logic specific to the base content object.
+        /// E.g. format for display.
+        /// </summary>
+        public string ContentType { get; private set; }
 
-        public override string ToJson()
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <summary>
+        /// Image data url of the pasted image's content.
+        /// </summary>
+        public string Content { get; private set; }
+
+        /// <summary>
+        /// Date + time the image content was pasted into ClipKeep
+        /// </summary>
+        public DateTime DatePasted { get; private set; }
+
+        /// <summary>
+        /// The unique ID of the content item in the database.
+        /// </summary>
+        public string DbId { get; private set; }
     }
 }
