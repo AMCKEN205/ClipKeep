@@ -1,6 +1,8 @@
 # ClipKeep
 MVC web app that provides a clipboard accessible across different devices! Users can store at max 5 items at  one time. If the users pastes a new item and is at the 5 items limit their oldest item is deleted.
 
+Users are restricted to stroing text or images.
+
 Implemented in C#/ASP.NET for server side logic, Cosmos DB for the database and some HTML + CSS + JS (largely JQuery) on the frontend.
 
 # Site URL: https://clipkeep.azurewebsites.net/
