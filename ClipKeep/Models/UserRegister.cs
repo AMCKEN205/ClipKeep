@@ -81,8 +81,7 @@ namespace ClipKeep.Models
                 var userStoreDoc = GetStoreJsonDoc();
 
                 // Generate the URI for the Users collection we're targerting in our cosmos DB
-                var userCollectionUri =
-                    UriFactory.CreateDocumentCollectionUri(CosmosConfig.DatabaseId, CosmosConfig.UsersCollectionId);
+                var userCollectionUri = UriFactory.CreateDocumentCollectionUri(CosmosConfig.DatabaseId, CosmosConfig.UsersCollectionId);
 
                 // Generate a client connection to the cosmos DB that gets disposed of once we've stored the new user's info.
                 using (var client =

@@ -25,6 +25,8 @@ namespace ClipKeep.Models
         /// </summary>
         public static string UsersCollectionId { get; private set; }
 
+        public static string PastedItemsCollectionId { get; private set; }
+
         /// <summary>
         /// Initalise properties used to connect to our Cosmos DB.
         /// </summary>
@@ -34,6 +36,7 @@ namespace ClipKeep.Models
             AuthorizationKey = ConfigurationManager.AppSettings["Cosmos.AuthorizationKey"];
             DatabaseId = ConfigurationManager.AppSettings["Cosmos.DatabaseId"];
             UsersCollectionId = ConfigurationManager.AppSettings["Cosmos.UsersCollectionId"];
+            PastedItemsCollectionId = ConfigurationManager.AppSettings["Cosmos.PastedItemsCollectionId"];
         }
 
         

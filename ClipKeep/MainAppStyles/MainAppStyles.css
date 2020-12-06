@@ -1,0 +1,146 @@
+﻿textarea {
+    resize: none;
+    min-height: 256px;
+    min-width: 256px;
+    max-width: 512px;
+    max-height: 512px;
+    height: 50vw;
+    width: 50vw;
+    display: block;
+    background-image:url("../Icons/check-list256.png");
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #f2dc87;
+    border-color: #7d75ef;
+    border-radius: 5px;
+    background-size:cover;
+    opacity: 0.6;
+}
+.navbar-brand {
+    background: url("../Icons/check-list64.png") no-repeat !important;
+    background-size: 40px 40px !important;
+    height: 40px !important;
+    margin: 5px !important;
+    width: 40px !important;
+}
+
+textarea img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.2;
+}
+
+textarea:focus,
+textarea:active {
+    background-color: #f7d85b;
+    opacity: 1.0;
+}
+
+@media screen and (min-width: 0px) {
+    .jumbotron h2 {
+        font-size: 15px;
+        text-align: justify;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .jumbotron h2 {
+        font-size: 30px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 0px) {
+    .jumbotron p {
+        font-size: 12px;
+        text-align: justify;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .jumbotron p {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+
+.btn-primary {
+    width: 45vw;
+    min-width: 180px;
+    max-width: 400px;
+    min-height: 30px;
+}
+
+
+figure {
+    display: inline-block;
+    padding-bottom: 15px
+}
+
+figure img {
+    vertical-align: top;
+}
+
+
+.pasted-item-text {
+    text-align: justify;
+    background-color: rgba(147, 140, 140,0.2);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.pasted-item-date{
+    text-align: right;
+    font-style: italic;
+}
+
+
+.pasted-item {
+    background: rgba(247, 216, 91, 0.4);
+    width: 50vw;
+    display: block;
+    overflow: auto;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 20px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    /* Just get used for aligning image figures. */
+    text-align: center;
+
+}
+
+.row{
+    padding-top: 20px;
+}
+
+hr {
+    background: #5b5bc1;
+}
+
+@media screen and (min-width: 0px){
+    .pasted-item-image{
+        width: 249px;
+        height: 249px;
+    }
+    .pasted-item{
+        min-width: 285px;
+        max-width: 380px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .pasted-item-image {
+        width: 500px;
+        height: 333px;
+    }
+    .pasted-item{
+        min-width: 536px;
+        max-width: 631px;
+    }
+}

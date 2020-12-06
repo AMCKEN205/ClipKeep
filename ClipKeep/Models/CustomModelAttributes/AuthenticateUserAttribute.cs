@@ -12,14 +12,14 @@ namespace ClipKeep.Models.CustomModelValidators
     /// Check the usernamePropertyName and password entered are attributed to the same user.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class UnameMatchesPassAttribute : ValidationAttribute
+    public class AuthenticateUserAttribute : ValidationAttribute
     {
         /// <summary>
         /// Username passed in on validatior instantiation. As we tie this to the password field
         /// no need to pass in the password too.
         /// </summary>
         private readonly string _usernamePropertyName;
-        public UnameMatchesPassAttribute(string usernamePropertyName)
+        public AuthenticateUserAttribute(string usernamePropertyName)
         {
             _usernamePropertyName = usernamePropertyName;
         }
@@ -37,9 +37,12 @@ namespace ClipKeep.Models.CustomModelValidators
 
             // Get the user model's entered username
 
-            // User reflection to get details of the username property we want to validate with.
-            var getUsername = validationContext.ObjectType.GetProperties()
-                .Where(property => property.Name == _usernamePropertyName).Take(1).ToArray();
+            // Reflection used to get details of the username property we want to validate with.
+            var getUsername = validationContext.ObjectType.GetProperties().Where
+                (
+                    property => property.Name == _usernamePropertyName
+                )
+                .ToArray();
 
             // Then get the value of this property with respect to the current user model instance we are looking at.
             var username = getUsername[0].GetValue(validationContext.ObjectInstance);
@@ -50,11 +53,18 @@ namespace ClipKeep.Models.CustomModelValidators
             // Generate the URI for the Users collection we're targerting in our cosmos DB
             var userCollectionUri = UriFactory.CreateDocumentCollectionUri(CosmosConfig.DatabaseId, CosmosConfig.UsersCollectionId);
 
+            var enableCrossPartitionQuery = new FeedOptions {EnableCrossPartitionQuery = true};
+
             using (var client = new DocumentClient(new Uri(CosmosConfig.EndPointUrl), CosmosConfig.AuthorizationKey))
             {
                 // Create/execute the query while ensuring we can run it across all partitions
-                var userGetQueryResults = client.CreateDocumentQuery(userCollectionUri, userGetQueryString,
-                    new FeedOptions {EnableCrossPartitionQuery = true}).ToList();
+                var userGetQueryResults = client.CreateDocumentQuery
+                (
+                    userCollectionUri, 
+                    userGetQueryString, 
+                    enableCrossPartitionQuery
+                )
+                .ToList();
 
                 // Validate against edge cases
 
@@ -64,7 +74,7 @@ namespace ClipKeep.Models.CustomModelValidators
                 }
                 else if (userGetQueryResults.Count() > 1)
                 {
-                    // We shouldn't hit this point, as username uniqueness get checked on registration.
+                    // We shouldn't hit this point, as username uniqueness gets checked on registration.
                     // However if we do something has gone seriously wrong, and something 
                     // malicious is probably going on, so hopefully redirection helps stop it!
 
@@ -74,7 +84,7 @@ namespace ClipKeep.Models.CustomModelValidators
                     return new ValidationResult("Critical error! Try again later.");
                 }
 
-                var userGetModel = JsonConvert.DeserializeObject<User>(userGetQueryResults[0].ToString());
+                var userGetModel = JsonConvert.DeserializeObject<UserLogin>(userGetQueryResults[0].ToString());
 
                // Validate entered password has is the same as stored password hash.
                 var enteredPassHash = PasswordHasher.GetPassHashString(password, userGetModel.PassSalt);
